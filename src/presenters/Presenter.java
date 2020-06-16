@@ -1,7 +1,9 @@
 package presenters;
 
-public interface Presenter {
-    void startReadingDataFlow();
+import java.io.IOException;
 
-    void sendDataToDevice();
+public interface Presenter {
+    void readDeviceDataFlow();
+
+   void sendDataToDevice(String data) throws IOException;
 }

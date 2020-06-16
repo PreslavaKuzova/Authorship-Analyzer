@@ -3,6 +3,8 @@ package controllers.io;
 import presenters.io.IOPresenter;
 import utils.io.devices.IODevice;
 
+//TODO: will handle all exceptions
+//TODO: it sends the requests to the other parts of the system
 public class IOController {
     private IOPresenter presenter;
 

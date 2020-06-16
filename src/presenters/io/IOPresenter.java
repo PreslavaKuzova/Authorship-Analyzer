@@ -4,6 +4,8 @@ import controllers.io.IOController;
 import presenters.Presenter;
 import utils.io.devices.IODevice;
 
+import java.io.IOException;
+
 public class IOPresenter implements Presenter {
     private IODevice device;
     private IOController controller;
@@ -17,13 +19,13 @@ public class IOPresenter implements Presenter {
     }
 
    @Override
-    public void startReadingDataFlow() {
-
+    public void readDeviceDataFlow() {
+        //TODO: after the stream is read, i need to initialize the collections
     }
 
     @Override
-    public void sendDataToDevice() {
-
+    public void sendDataToDevice(String data) throws IOException {
+        device.write(data);
     }
 
 }
