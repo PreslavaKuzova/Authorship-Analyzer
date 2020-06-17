@@ -1,12 +1,17 @@
 package services;
 
-import java.io.IOException;
 import java.io.InputStream;
 
-public interface AuthorshipAnalyzer {
-    LinguisticSignature calculateSignature(InputStream mysteryText) throws IOException;
+public class AuthorshipAnalyzer {
+    public LinguisticSignature calculateSignature(InputStream mysteryText) {
+        return null;
+    }
 
-    double calculateSimilarity(LinguisticSignature firstSignature, LinguisticSignature secondSignature);
+    public double calculateSimilarity(LinguisticSignature firstSignature, LinguisticSignature secondSignature) {
+        return 0;
+    }
 
-    String findAuthor(InputStream mysteryText) throws IOException;
+    public String findAuthor(InputStream mysteryText) {
+        return null;
+    }
 }
