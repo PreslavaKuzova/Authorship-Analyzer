@@ -1,4 +1,6 @@
-package utils.io.devices;
+package devices.io;
+
+import devices.Device;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -12,7 +14,7 @@ import java.io.OutputStreamWriter;
 import java.io.IOException;
 import java.util.stream.Stream;
 
-public class FileDevice implements IODevice {
+public class FileDevice implements Device {
     private String inputDirectory;
     private String outputDirectory;
 

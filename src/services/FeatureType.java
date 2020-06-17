@@ -1,4 +1,4 @@
-package data;
+package services;
 
 public enum FeatureType {
     AVERAGE_WORD_LENGTH(0),

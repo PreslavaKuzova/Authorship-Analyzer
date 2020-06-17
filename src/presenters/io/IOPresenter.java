@@ -1,31 +1,29 @@
 package presenters.io;
 
-import controllers.io.IOController;
+import devices.Device;
 import presenters.Presenter;
-import utils.io.devices.IODevice;
 
 import java.io.IOException;
+import java.util.stream.Stream;
 
 public class IOPresenter implements Presenter {
-    private IODevice device;
-    private IOController controller;
+    private Device device;
 
-    public IOPresenter(IODevice device) {
+    public IOPresenter(Device device) {
         this.device = device;
     }
 
-    public void setController(IOController controller) {
-        this.controller = controller;
-    }
-
-   @Override
-    public void readDeviceDataFlow() {
-        //TODO: after the stream is read, i need to initialize the collections
+    @Override
+    public Stream<String> readDeviceDataFlow() throws IOException {
+        Stream<String> input = this.device.read();
+        return input;
     }
 
     @Override
     public void sendDataToDevice(String data) throws IOException {
         device.write(data);
     }
+
+
 
 }
