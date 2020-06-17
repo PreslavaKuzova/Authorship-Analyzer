@@ -4,36 +4,41 @@ import controllers.Controller;
 import controllers.io.IOController;
 import devices.Device;
 import distributors.Distributor;
+import error_handlers.ErrorHandler;
 import presenters.Presenter;
 import presenters.io.IOPresenter;
 
 import java.io.IOException;
 import java.util.stream.Stream;
 
-//TODO: handles all exceptions, but how???
 public class IODistributor implements Distributor {
     private Device device;
     private Presenter presenter;
     private Controller controller;
+    private ErrorHandler errorHandler;
 
     public IODistributor(Device device) {
         this.device = device;
         this.presenter = new IOPresenter(device);
         this.controller = new IOController();
+        this.errorHandler = ErrorHandler.getInstance();
     }
 
     @Override
     public void start() {
         try {
             Stream<String> input = this.presenter.readDeviceDataFlow();
-            //switch-case for the options all the options that are provided to the user
-            //send that info to the controller
-            //get back the result
-            //send it to the presenter
-            //presenters shows it to the device
+            //something here
         } catch (IOException e) {
-
-            e.printStackTrace();
+            errorHandler.logError(e.getStackTrace());
         }
+    }
+
+    private void findAuthor(){
+        //something
+    }
+
+    private void compareTwoDataSets(){
+        //something
     }
 }

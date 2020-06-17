@@ -21,7 +21,31 @@ public class AuthorshipAnalyzer {
         }
     }
 
-    public LinguisticSignature calculateSignature(Stream<String> text) {
+    public String findAuthor(Stream<String> text) {
+        LinguisticSignature mysteryTextSignature = calculateSignature(text);
+
+        double bestSimilarityRatio = Double.MAX_VALUE;
+        String bestSimilarityAuthor = null;
+
+        for (Map.Entry<String, LinguisticSignature> entry : this.knownSignatures.entrySet()) {
+            double currentSimilarity = calculateSimilarity(mysteryTextSignature, entry.getValue());
+            if (Double.compare(currentSimilarity, bestSimilarityRatio) < 0) {
+                bestSimilarityRatio = currentSimilarity;
+                bestSimilarityAuthor = entry.getKey();
+            }
+        }
+
+        return bestSimilarityAuthor;
+    }
+
+    public double findSimilarity(Stream<String> firstText, Stream<String> secondText) {
+        LinguisticSignature first = this.calculateSignature(firstText);
+        LinguisticSignature second = this.calculateSignature(secondText);
+
+        return calculateSimilarity(first, second);
+    }
+
+    private LinguisticSignature calculateSignature(Stream<String> text) {
         TextStripper stripper = new TextStripper();
 
         Collection<String> cleanStringCollection = stripper.generateCleanStringCollection(text);
@@ -40,7 +64,8 @@ public class AuthorshipAnalyzer {
         return new LinguisticSignature(features);
     }
 
-    public double calculateSimilarity(LinguisticSignature firstSignature, LinguisticSignature secondSignature) {
+    private double calculateSimilarity(LinguisticSignature firstSignature, LinguisticSignature secondSignature) {
+
         Map<FeatureType, Double> firstFeatures = firstSignature.getFeatures();
         Map<FeatureType, Double> secondFeatures = secondSignature.getFeatures();
 
@@ -51,23 +76,6 @@ public class AuthorshipAnalyzer {
                 .sum();
 
         return result;
-    }
-
-    public String findAuthor(Stream<String> text) {
-        LinguisticSignature mysteryTextSignature = calculateSignature(text);
-
-        double bestSimilarityRatio = Double.MAX_VALUE;
-        String bestSimilarityAuthor = null;
-
-        for (Map.Entry<String, LinguisticSignature> entry : this.knownSignatures.entrySet()) {
-            double currentSimilarity = calculateSimilarity(mysteryTextSignature, entry.getValue());
-            if (Double.compare(currentSimilarity, bestSimilarityRatio) < 0) {
-                bestSimilarityRatio = currentSimilarity;
-                bestSimilarityAuthor = entry.getKey();
-            }
-        }
-
-        return bestSimilarityAuthor;
     }
 
     private void parseKnownSignatures(Stream<String> signatures) {
