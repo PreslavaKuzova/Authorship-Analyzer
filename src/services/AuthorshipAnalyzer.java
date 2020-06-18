@@ -5,13 +5,12 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class AuthorshipAnalyzer {
 
     private Map<String, LinguisticSignature> knownSignatures;
 
-    public AuthorshipAnalyzer(Stream<String> signaturesDataset, double[] weights) {
+    public AuthorshipAnalyzer(Collection<String> signaturesDataset, double[] weights) {
         this.parseKnownSignatures(signaturesDataset);
 
         int i = 0;
@@ -21,7 +20,7 @@ public class AuthorshipAnalyzer {
         }
     }
 
-    public String findAuthor(Stream<String> text) {
+    public String findAuthor(Collection<String> text) {
         LinguisticSignature mysteryTextSignature = calculateSignature(text);
 
         double bestSimilarityRatio = Double.MAX_VALUE;
@@ -38,14 +37,14 @@ public class AuthorshipAnalyzer {
         return bestSimilarityAuthor;
     }
 
-    public double findSimilarity(Stream<String> firstText, Stream<String> secondText) {
+    public double findSimilarity(Collection<String> firstText, Collection<String> secondText) {
         LinguisticSignature first = this.calculateSignature(firstText);
         LinguisticSignature second = this.calculateSignature(secondText);
 
         return calculateSimilarity(first, second);
     }
 
-    private LinguisticSignature calculateSignature(Stream<String> text) {
+    private LinguisticSignature calculateSignature(Collection<String> text) {
         TextStripper stripper = new TextStripper();
 
         Collection<String> cleanStringCollection = stripper.generateCleanStringCollection(text);
@@ -78,8 +77,8 @@ public class AuthorshipAnalyzer {
         return result;
     }
 
-    private void parseKnownSignatures(Stream<String> signatures) {
-        this.knownSignatures = signatures
+    private void parseKnownSignatures(Collection<String> signatures) {
+        this.knownSignatures = signatures.stream()
                 .collect(Collectors.toMap(LinguisticSignature::extractAuthorName,
                         LinguisticSignature::createLinguisticSignature));
     }

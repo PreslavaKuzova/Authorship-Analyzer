@@ -5,7 +5,6 @@ import devices.Device;
 import java.io.*;
 import java.util.Collection;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class FileDevice implements Device {
     private String inputDirectory;
@@ -14,6 +13,10 @@ public class FileDevice implements Device {
     public FileDevice(String inputDirectory, String outputDirectory) {
         this.inputDirectory = inputDirectory;
         this.outputDirectory = outputDirectory;
+    }
+
+    public FileDevice(String inputDirectory) {
+        this.inputDirectory = inputDirectory;
     }
 
     @Override

@@ -7,10 +7,10 @@ import java.util.stream.Stream;
 
 public class TextStripper {
 
-    Collection<String> generateCleanStringCollection(Stream<String> text) {
+    Collection<String> generateCleanStringCollection(Collection<String> text) {
         final int minLength = 1;
 
-        return text.map(s -> s.split("\\s+"))
+        return text.stream().map(s -> s.split("\\s+"))
                 .flatMap(Arrays::stream)
                 .map(TextStripper::cleanUp)
                 .filter(word -> word.length() >= minLength)
@@ -23,9 +23,9 @@ public class TextStripper {
                 .replaceAll("\\)", "");
     }
 
-    Collection<String> generateCleanSentenceCollection(Stream<String> text) {
+    Collection<String> generateCleanSentenceCollection(Collection<String> text) {
         return Arrays.asList(
-                text.collect(Collectors.joining(" "))
+                text.stream().collect(Collectors.joining(" "))
                         .split("[\\.\\?\\!]"))
                 .stream()
                 .filter(x -> !(x.isBlank()))

@@ -1,23 +1,29 @@
 package controllers.io;
 
 import controllers.Controller;
+import initializer.AuthorshipInitializer;
 import services.AuthorshipAnalyzer;
 
-import java.util.stream.Stream;
+import java.util.Collection;
 
 public class IOController implements Controller {
-    AuthorshipAnalyzer analyzer;
+    private AuthorshipAnalyzer analyzer;
 
-    //not optimal, should be in the constructor, but i shouldn't pass anything to the constructor???
-    public void setAnalyzer(Stream<String> signaturesDataset, double[] weights) {
-        this.analyzer = new AuthorshipAnalyzer(signaturesDataset, weights);
+    public IOController() {
+        AuthorshipInitializer initializer =
+                new AuthorshipInitializer("knownSignatures.txt", "weights.txt");
+
+        Collection<String> dataset = initializer.extractDataSetCollection();
+        double[] weights = initializer.extractWeights();
+
+        this.analyzer = new AuthorshipAnalyzer(dataset, weights);
     }
 
-    public String findAuthor(Stream<String> text) {
+    public String findAuthor(Collection<String> text) {
         return analyzer.findAuthor(text);
     }
 
-    public double findSimilarity(Stream<String> first, Stream<String> second) {
+    public double findSimilarity(Collection<String> first, Collection<String> second) {
         return analyzer.findSimilarity(first, second);
     }
 

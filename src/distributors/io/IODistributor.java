@@ -8,6 +8,7 @@ import error_handlers.ErrorHandler;
 import presenters.Presenter;
 import presenters.io.IOPresenter;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
@@ -30,8 +31,7 @@ public class IODistributor implements Distributor {
     public void start() {
         try {
             Collection<String> input = this.presenter.readDeviceDataFlow();
-            input.stream().forEach(System.out::print);
-
+            findAuthor();
         } catch (IOException e) {
             errorHandler.logError(e.getStackTrace());
         }
