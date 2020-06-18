@@ -2,14 +2,11 @@ package services;
 
 import devices.Device;
 import devices.io.FileDevice;
-import mocks.FileDeviceMock;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
+import devices.FileDeviceMock;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.concurrent.Delayed;
 
 import static org.junit.Assert.assertEquals;
 

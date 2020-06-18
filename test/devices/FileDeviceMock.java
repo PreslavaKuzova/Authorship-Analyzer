@@ -1,6 +1,4 @@
-package mocks;
-
-import devices.Device;
+package devices;
 
 import java.io.IOException;
 import java.util.ArrayList;
