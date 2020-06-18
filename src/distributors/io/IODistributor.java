@@ -8,11 +8,8 @@ import error_handlers.ErrorHandler;
 import presenters.Presenter;
 import presenters.io.IOPresenter;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.stream.Stream;
 
 public class IODistributor implements Distributor {
     private Device device;
@@ -31,17 +28,17 @@ public class IODistributor implements Distributor {
     public void start() {
         try {
             Collection<String> input = this.presenter.readDeviceDataFlow();
-            findAuthor();
+            this.presenter.sendDataToDevice(findAuthor(input));
         } catch (IOException e) {
             errorHandler.logError(e.getStackTrace());
         }
     }
 
-    private void findAuthor(){
-        //something
+    private String findAuthor(Collection<String> input) {
+        return this.controller.findAuthor(input);
     }
 
-    private void compareTwoDataSets(){
-        //something
+    private double compareTwoDataSets(Collection<String> first, Collection<String> second) {
+        return this.controller.findSimilarity(first, second);
     }
 }

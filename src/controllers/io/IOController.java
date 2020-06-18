@@ -19,10 +19,12 @@ public class IOController implements Controller {
         this.analyzer = new AuthorshipAnalyzer(dataset, weights);
     }
 
+    @Override
     public String findAuthor(Collection<String> text) {
         return analyzer.findAuthor(text);
     }
 
+    @Override
     public double findSimilarity(Collection<String> first, Collection<String> second) {
         return analyzer.findSimilarity(first, second);
     }

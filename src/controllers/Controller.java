@@ -1,5 +1,9 @@
 package controllers;
 
+import java.util.Collection;
+
 public interface Controller {
-    //TODO: write logic here for the controller
+    public String findAuthor(Collection<String> text);
+
+    public double findSimilarity(Collection<String> first, Collection<String> second);
 }
