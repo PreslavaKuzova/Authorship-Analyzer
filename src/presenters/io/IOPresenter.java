@@ -4,7 +4,7 @@ import devices.Device;
 import presenters.Presenter;
 
 import java.io.IOException;
-import java.util.stream.Stream;
+import java.util.Collection;
 
 public class IOPresenter implements Presenter {
     private Device device;
@@ -14,8 +14,8 @@ public class IOPresenter implements Presenter {
     }
 
     @Override
-    public Stream<String> readDeviceDataFlow() throws IOException {
-        Stream<String> input = this.device.read();
+    public Collection<String> readDeviceDataFlow() throws IOException {
+        Collection<String> input = this.device.read();
         return input;
     }
 
@@ -23,7 +23,6 @@ public class IOPresenter implements Presenter {
     public void sendDataToDevice(String data) throws IOException {
         device.write(data);
     }
-
 
 
 }

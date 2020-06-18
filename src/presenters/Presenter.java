@@ -1,11 +1,11 @@
 package presenters;
 
 import java.io.IOException;
-import java.util.stream.Stream;
+import java.util.Collection;
 
 public interface Presenter {
-    Stream<String> readDeviceDataFlow() throws IOException;
+    Collection<String> readDeviceDataFlow() throws IOException;
 
-   void sendDataToDevice(String data) throws IOException;
+    void sendDataToDevice(String data) throws IOException;
 
 }

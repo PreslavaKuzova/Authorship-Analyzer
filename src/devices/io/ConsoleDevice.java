@@ -2,18 +2,16 @@ package devices.io;
 
 import devices.Device;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.stream.Stream;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Scanner;
 
 public class ConsoleDevice implements Device {
     @Override
-    public Stream<String> read() throws IOException {
-        try (BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in))) {
-            Stream<String> lines = buffer.lines();
-            return lines;
-        }
+    public Collection<String> read() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        return Arrays.asList(scanner.nextLine());
     }
 
     @Override

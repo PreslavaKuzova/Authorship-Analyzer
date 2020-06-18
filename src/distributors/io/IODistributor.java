@@ -9,6 +9,8 @@ import presenters.Presenter;
 import presenters.io.IOPresenter;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.stream.Stream;
 
 public class IODistributor implements Distributor {
@@ -27,8 +29,9 @@ public class IODistributor implements Distributor {
     @Override
     public void start() {
         try {
-            Stream<String> input = this.presenter.readDeviceDataFlow();
-            //something here
+            Collection<String> input = this.presenter.readDeviceDataFlow();
+            input.stream().forEach(System.out::print);
+
         } catch (IOException e) {
             errorHandler.logError(e.getStackTrace());
         }

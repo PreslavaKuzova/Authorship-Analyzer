@@ -1,5 +1,6 @@
 import devices.Device;
 import devices.io.ConsoleDevice;
+import devices.io.FileDevice;
 import distributors.Distributor;
 import distributors.io.IODistributor;
 
